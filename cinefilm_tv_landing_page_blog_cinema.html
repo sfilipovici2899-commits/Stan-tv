@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="it" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineFilm & TV | Il tuo passaporto per il grande e piccolo schermo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Cinzel:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            red: '#E50914',
+                            darkRed: '#B81D24',
+                            gold: '#FFD700',
+                            goldDark: '#C5A000',
+                            dark: '#0D0D11',
+                            cardBg: '#16161E',
+                            cardHover: '#1F1F2B',
+                            border: '#2A2A3C'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        display: ['Cinzel', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0D0D11;
+            color: #E2E8F0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(180deg, rgba(13, 13, 17, 0.4) 0%, rgba(13, 13, 17, 0.85) 70%, #0D0D11 100%),
+                        radial-gradient(circle at 50% 30%, rgba(229, 9, 20, 0.18) 0%, transparent 60%);
+        }
+
+        .glow-red {
+            box-shadow: 0 0 25px -5px rgba(229, 9, 20, 0.4);
+        }
+
+        .glow-gold {
+            box-shadow: 0 0 20px -5px rgba(255, 215, 0, 0.3);
+        }
+
+        .card-zoom:hover .card-img {
+            transform: scale(1.06);
+        }
+
+        .glass-nav {
+            background: rgba(13, 13, 17, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .text-gradient-gold {
+            background: linear-gradient(135deg, #FFF099 0%, #FFD700 50%, #B8860B 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .text-gradient-red {
+            background: linear-gradient(135deg, #FF6B6B 0%, #E50914 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0D0D11;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2A2A3C;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #E50914;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-red selection:text-white">
+
+    <header class="fixed top-0 left-0 w-full z-50 glass-nav border-b border-brand-border/50 transition-all duration-300" id="main-header">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-red to-brand-gold flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform duration-300">
+                        <i class="fa-solid font-black fa-film text-white text-xl"></i>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-display font-extrabold text-2xl tracking-wider text-white group-hover:text-brand-red transition-colors">
+                            CINE<span class="text-brand-red">FILM</span>
+                        </span>
+                        <span class="text-[10px] tracking-[0.25em] text-gray-400 font-semibold uppercase -mt-1">& TV BLOG</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden lg:flex items-center gap-8 font-medium text-sm text-gray-300">
+                    <a href="#home" class="hover:text-brand-red transition-colors flex items-center gap-1.5 active-link text-brand-red font-semibold">
+                        <i class="fa-solid fa-house text-xs"></i> Home
+                    </a>
+                    <a href="#trending" class="hover:text-brand-red transition-colors flex items-center gap-1.5">
+                        <i class="fa-solid fa-fire text-xs"></i> In Evidenza
+                    </a>
+                    <a href="#serie-film" class="hover:text-brand-red transition-colors flex items-center gap-1.5">
+                        <i class="fa-solid fa-tv text-xs"></i> Serie TV
+                    </a>
+                    <a href="#serie-film" class="hover:text-brand-red transition-colors flex items-center gap-1.5">
+                        <i class="fa-solid fa-clapperboard text-xs"></i> Film
+                    </a>
+                    <a href="#top-chart" class="hover:text-brand-red transition-colors flex items-center gap-1.5">
+                        <i class="fa-solid fa-ranking-star text-xs text-brand-gold"></i> Top Chart
+                    </a>
+                </nav>
+
+                <!-- Search & Actions -->
+                <div class="hidden sm:flex items-center gap-4">
+                    <!-- Search Input -->
+                    <div class="relative group">
+                        <input type="text" placeholder="Cerca film, serie, recensioni..." 
+                               class="bg-brand-cardBg border border-brand-border text-xs rounded-full py-2.5 pl-10 pr-4 w-48 focus:w-64 focus:outline-none focus:border-brand-red text-gray-200 placeholder-gray-400 transition-all duration-300">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs group-focus-within:text-brand-red transition-colors"></i>
+                    </div>
+
+                    <!-- Newsletter CTA -->
+                    <button onclick="toggleModal('newsletter-modal')" class="bg-gradient-to-r from-brand-red to-brand-darkRed hover:from-red-600 hover:to-brand-red text-white text-xs font-bold px-5 py-2.5 rounded-full glow-red hover:shadow-red-600/50 transition-all duration-300 transform hover:-translate-y-0.5 flex items-center gap-2">
+                        <i class="fa-solid fa-paper-plane"></i>
+                        <span>Iscriviti</span>
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="lg:hidden flex items-center gap-3">
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-white p-2 rounded-lg bg-brand-cardBg border border-brand-border">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-brand-dark/95 border-b border-brand-border px-4 pt-3 pb-6 space-y-3 backdrop-blur-xl">
+            <div class="relative my-2">
+                <input type="text" placeholder="Cerca film o serie TV..." 
+                       class="w-full bg-brand-cardBg border border-brand-border text-sm rounded-lg py-2.5 pl-10 pr-4 text-gray-200">
+                <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
+            </div>
+            <a href="#home" class="block py-2 text-brand-red font-semibold text-base border-b border-brand-border/40"><i class="fa-solid fa-house mr-2"></i> Home</a>
+            <a href="#trending" class="block py-2 text-gray-300 hover:text-white text-base border-b border-brand-border/40"><i class="fa-solid fa-fire mr-2"></i> In Evidenza</a>
+            <a href="#serie-film" class="block py-2 text-gray-300 hover:text-white text-base border-b border-brand-border/40"><i class="fa-solid fa-tv mr-2"></i> Serie TV & Film</a>
+            <a href="#top-chart" class="block py-2 text-gray-300 hover:text-white text-base border-b border-brand-border/40"><i class="fa-solid fa-ranking-star mr-2 text-brand-gold"></i> Top Chart</a>
+            <button onclick="toggleModal('newsletter-modal')" class="w-full mt-4 bg-brand-red text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2">
+                <i class="fa-solid fa-paper-plane"></i> Iscriviti alla Newsletter
+            </button>
+        </div>
+    </header>
+
+    <section id="home" class="relative min-h-screen flex items-center pt-24 pb-16 hero-gradient overflow-hidden">
+        <!-- Background Decorative Images Grid (Faded) -->
+        <div class="absolute inset-0 opacity-15 grid grid-cols-2 md:grid-cols-4 gap-4 p-4 pointer-events-none -z-10 transform -rotate-3 scale-105">
+            <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=800&auto=format&fit=crop" class="rounded-2xl object-cover h-full w-full" alt="Cinema bg 1">
+            <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=800&auto=format&fit=crop" class="rounded-2xl object-cover h-full w-full" alt="Cinema bg 2">
+            <img src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?q=80&w=800&auto=format&fit=crop" class="rounded-2xl object-cover h-full w-full" alt="Cinema bg 3">
+            <img src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?q=80&w=800&auto=format&fit=crop" class="rounded-2xl object-cover h-full w-full" alt="Cinema bg 4">
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10 text-center lg:text-left">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Hero Content Left -->
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-cardBg/90 border border-brand-border text-brand-gold text-xs font-semibold tracking-wide uppercase shadow-lg">
+                        <span class="w-2 h-2 rounded-full bg-brand-gold animate-ping"></span>
+                        <i class="fa-solid fa-sparkles"></i> Recensioni & Deep Dive Esclusivi
+                    </div>
+
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight">
+                        Il tuo passaporto per il <br class="hidden sm:inline">
+                        <span class="text-gradient-red">Grande</span> e <span class="text-gradient-gold">Piccolo</span> Schermo.
+                    </h1>
+
+                    <p class="text-gray-300 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed">
+                        Analisi approfondite, recensioni spoiler-free, retroscena dai set e le ultime novità sulle serie TV più attese e le uscite cinematografiche del momento.
+                    </p>
+
+                    <!-- CTA Buttons -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                        <a href="#trending" class="w-full sm:w-auto bg-brand-red hover:bg-brand-darkRed text-white font-bold px-8 py-4 rounded-xl shadow-lg glow-red hover:scale-105 transition-all duration-300 text-center flex items-center justify-center gap-3">
+                            <span>Esplora Ultimi Articoli</span>
+                            <i class="fa-solid fa-arrow-right text-sm"></i>
+                        </a>
+                        <button onclick="toggleModal('newsletter-modal')" class="w-full sm:w-auto bg-brand-cardBg hover:bg-brand-cardHover border border-brand-border text-gray-200 font-semibold px-8 py-4 rounded-xl transition-all duration-300 text-center flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-envelope text-brand-gold"></i>
+                            <span>Iscriviti al Club VIP</span>
+                        </button>
+                    </div>
+
+                    <!-- Stats Counter -->
+                    <div class="pt-8 border-t border-brand-border/60 grid grid-cols-3 gap-4 max-w-lg mx-auto lg:mx-0 text-center">
+                        <div>
+                            <p class="text-2xl sm:text-3xl font-extrabold text-white font-display">1,500+</p>
+                            <p class="text-xs text-gray-400 font-medium">Recensioni Pubblicate</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl sm:text-3xl font-extrabold text-brand-gold font-display">98%</p>
+                            <p class="text-xs text-gray-400 font-medium">Lettori Soddisfatti</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl sm:text-3xl font-extrabold text-brand-red font-display">50K+</p>
+                            <p class="text-xs text-gray-400 font-medium">Cinefili nella Community</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Feature Banner Right -->
+                <div class="lg:col-span-5 relative">
+                    <div class="relative mx-auto max-w-md lg:max-w-none">
+                        <!-- Decorative Glow -->
+                        <div class="absolute -inset-1 bg-gradient-to-r from-brand-red to-brand-gold rounded-3xl blur-xl opacity-30 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+                        
+                        <!-- Featured Spotlight Card -->
+                        <div class="relative bg-brand-cardBg border border-brand-border/80 rounded-2xl overflow-hidden shadow-2xl group">
+                            <div class="relative h-80 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?q=80&w=1000&auto=format&fit=crop" 
+                                     alt="Dune Part Two" 
+                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                <div class="absolute inset-0 bg-gradient-to-t from-brand-cardBg via-brand-cardBg/20 to-transparent"></div>
+                                
+                                <span class="absolute top-4 left-4 bg-brand-red text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow">
+                                    <i class="fa-solid fa-star text-brand-gold mr-1"></i> Speciale Copertina
+                                </span>
+
+                                <div class="absolute bottom-4 left-4 right-4 flex justify-between items-end">
+                                    <div>
+                                        <span class="text-xs text-brand-gold font-semibold uppercase tracking-widest">DEEP DIVE CINEMA</span>
+                                        <h3 class="text-xl font-bold text-white leading-tight mt-1">Dune - Parte Due: L'Analisi del Capolavoro Sci-Fi di Denis Villeneuve</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="p-5 flex items-center justify-between text-xs text-gray-400 border-t border-brand-border/40">
+                                <div class="flex items-center gap-2">
+                                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=100&auto=format&fit=crop" class="w-7 h-7 rounded-full object-cover border border-brand-gold" alt="Autore">
+                                    <span>Di <strong>Elena Rossi</strong></span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <span><i class="fa-regular fa-clock mr-1"></i> 8 min</span>
+                                    <span class="text-brand-gold font-bold"><i class="fa-solid fa-star"></i> 9.8/10</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="trending" class="py-20 relative bg-brand-dark border-t border-brand-border/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Section Header -->
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                <div>
+                    <div class="flex items-center gap-2 text-brand-red font-bold text-sm tracking-wider uppercase mb-2">
+                        <i class="fa-solid fa-fire animate-bounce"></i> Trending Now
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Articoli in Evidenza</h2>
+                </div>
+                <p class="text-gray-400 text-sm max-w-md mt-2 md:mt-0">Le ultime recensioni ed analisi più popolari lette dalla nostra community nell'ultima settimana.</p>
+            </div>
+
+            <!-- Articles Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Card 1 -->
+                <article class="bg-brand-cardBg rounded-2xl border border-brand-border overflow-hidden hover:border-brand-red/50 transition-all duration-300 hover:-translate-y-1.5 shadow-xl flex flex-col group card-zoom">
+                    <div class="relative h-52 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1518676599629-2d4be058cd7e?q=80&w=800&auto=format&fit=crop" alt="House of the Dragon" class="w-full h-full object-cover card-img transition-transform duration-500">
+                        <span class="absolute top-3 left-3 bg-brand-red text-white text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">Serie TV</span>
+                        <div class="absolute top-3 right-3 bg-black/70 backdrop-blur-md text-brand-gold text-xs font-bold px-2.5 py-1 rounded-lg border border-white/10">
+                            <i class="fa-solid fa-star"></i> 9.2
+                        </div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-3 text-xs text-gray-400 mb-2">
+                                <span><i class="fa-regular fa-calendar mr-1"></i> 22 Settembre 2026</span>
+                                <span>•</span>
+                                <span><i class="fa-regular fa-clock mr-1"></i> 6 min lettura</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-white group-hover:text-brand-red transition-colors line-clamp-2 mb-3">
+                                House of the Dragon: Il finale di stagione spiegato nel dettaglio
+                            </h3>
+                            <p class="text-gray-400 text-sm line-clamp-3 mb-4">
+                                Tutte le implicazioni della Danza dei Draghi, i tradimenti inattesi e cosa dobbiamo aspettarci dai prossimi episodi della saga targata HBO.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-brand-border/40 flex items-center justify-between">
+                            <span class="text-xs text-gray-300 font-semibold">Di Marco Bianchi</span>
+                            <a href="#" class="text-xs text-brand-red font-bold hover:underline inline-flex items-center gap-1">
+                                Leggi di più <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card 2 -->
+                <article class="bg-brand-cardBg rounded-2xl border border-brand-border overflow-hidden hover:border-brand-red/50 transition-all duration-300 hover:-translate-y-1.5 shadow-xl flex flex-col group card-zoom">
+                    <div class="relative h-52 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?q=80&w=800&auto=format&fit=crop" alt="Oppenheimer" class="w-full h-full object-cover card-img transition-transform duration-500">
+                        <span class="absolute top-3 left-3 bg-purple-600 text-white text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">Cinema</span>
+                        <div class="absolute top-3 right-3 bg-black/70 backdrop-blur-md text-brand-gold text-xs font-bold px-2.5 py-1 rounded-lg border border-white/10">
+                            <i class="fa-solid fa-star"></i> 9.6
+                        </div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-3 text-xs text-gray-400 mb-2">
+                                <span><i class="fa-regular fa-calendar mr-1"></i> 20 Settembre 2026</span>
+                                <span>•</span>
+                                <span><i class="fa-regular fa-clock mr-1"></i> 10 min lettura</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-white group-hover:text-brand-red transition-colors line-clamp-2 mb-3">
+                                Il Cinema di Nolan: Il sonno del tempo e la fisica del destino
+                            </h3>
+                            <p class="text-gray-400 text-sm line-clamp-3 mb-4">
+                                Un viaggio retrospettivo attraverso lo stile di regia di Christopher Nolan: da Memento fino ai successi più recenti in IMAX.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-brand-border/40 flex items-center justify-between">
+                            <span class="text-xs text-gray-300 font-semibold">Di Sofia Conti</span>
+                            <a href="#" class="text-xs text-brand-red font-bold hover:underline inline-flex items-center gap-1">
+                                Leggi di più <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card 3 -->
+                <article class="bg-brand-cardBg rounded-2xl border border-brand-border overflow-hidden hover:border-brand-red/50 transition-all duration-300 hover:-translate-y-1.5 shadow-xl flex flex-col group card-zoom">
+                    <div class="relative h-52 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=800&auto=format&fit=crop" alt="Stranger Things" class="w-full h-full object-cover card-img transition-transform duration-500">
+                        <span class="absolute top-3 left-3 bg-brand-gold text-black text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">Anticipazioni</span>
+                        <div class="absolute top-3 right-3 bg-black/70 backdrop-blur-md text-brand-gold text-xs font-bold px-2.5 py-1 rounded-lg border border-white/10">
+                            <i class="fa-solid fa-star"></i> 8.8
+                        </div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-3 text-xs text-gray-400 mb-2">
+                                <span><i class="fa-regular fa-calendar mr-1"></i> 18 Settembre 2026</span>
+                                <span>•</span>
+                                <span><i class="fa-regular fa-clock mr-1"></i> 5 min lettura</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-white group-hover:text-brand-red transition-colors line-clamp-2 mb-3">
+                                Le 10 Serie TV più attese sui servizi di streaming nei prossimi mesi
+                            </h3>
+                            <p class="text-gray-400 text-sm line-clamp-3 mb-4">
+                                Da Netflix ad Apple TV+, ecco la guida completa per non perdersi nemmeno una premiere da qui alla fine dell'anno.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-brand-border/40 flex items-center justify-between">
+                            <span class="text-xs text-gray-300 font-semibold">Di Alessandro Moretti</span>
+                            <a href="#" class="text-xs text-brand-red font-bold hover:underline inline-flex items-center gap-1">
+                                Leggi di più <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="serie-film" class="py-20 relative bg-gradient-to-b from-brand-dark via-brand-cardBg/40 to-brand-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-brand-gold font-bold text-xs uppercase tracking-widest">Esplora per Categoria</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">Serie TV & Film Consigliati</h2>
+                <p class="text-gray-400 text-sm mt-3">Filtra per genere o tipologia di articolo per trovare esattamente la lettura ideale per i tuoi gusti cinematografici.</p>
+
+                <!-- Interactive Filter Tabs -->
+                <div class="flex flex-wrap items-center justify-center gap-2 mt-8" id="filter-tabs">
+                    <button onclick="filterContent('all')" class="tab-btn active-tab bg-brand-red text-white px-5 py-2.5 rounded-full text-xs font-bold transition-all shadow-md">
+                        Tutti i Contenuti
+                    </button>
+                    <button onclick="filterContent('recensioni')" class="tab-btn bg-brand-cardBg border border-brand-border text-gray-300 hover:text-white hover:border-brand-red px-5 py-2.5 rounded-full text-xs font-bold transition-all">
+                        <i class="fa-solid fa-star text-brand-gold mr-1"></i> Recensioni
+                    </button>
+                    <button onclick="filterContent('deepdive')" class="tab-btn bg-brand-cardBg border border-brand-border text-gray-300 hover:text-white hover:border-brand-red px-5 py-2.5 rounded-full text-xs font-bold transition-all">
+                        <i class="fa-solid fa-magnifying-glass-plus text-brand-red mr-1"></i> Deep Dive
+                    </button>
+                    <button onclick="filterContent('curiosita')" class="tab-btn bg-brand-cardBg border border-brand-border text-gray-300 hover:text-white hover:border-brand-red px-5 py-2.5 rounded-full text-xs font-bold transition-all">
+                        <i class="fa-solid fa-lightbulb text-yellow-400 mr-1"></i> Curiosità & Trivia
+                    </button>
+                    <button onclick="filterContent('trailer')" class="tab-btn bg-brand-cardBg border border-brand-border text-gray-300 hover:text-white hover:border-brand-red px-5 py-2.5 rounded-full text-xs font-bold transition-all">
+                        <i class="fa-solid fa-play text-red-500 mr-1"></i> Trailer & Unbox
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dynamic Filterable Content Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="content-grid">
+                
+                <!-- Filter Item 1 -->
+                <div class="filter-item recensioni bg-brand-cardBg border border-brand-border rounded-xl overflow-hidden hover:border-brand-gold/60 transition-all duration-300 flex flex-col group">
+                    <div class="relative h-44 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Cyberpunk">
+                        <span class="absolute top-2 left-2 bg-black/70 text-brand-gold text-[10px] font-bold px-2 py-0.5 rounded">Recensione</span>
+                    </div>
+                    <div class="p-4 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h4 class="text-base font-bold text-white group-hover:text-brand-gold transition-colors line-clamp-2">Blade Runner 2049: L'estetica del vuoto urbano</h4>
+                            <p class="text-xs text-gray-400 mt-2 line-clamp-2">Perché la fotografia di Roger Deakins ha cambiato il genere fantascientifico per sempre.</p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-brand-border/40 flex items-center justify-between text-xs text-gray-400">
+                            <span>4 min</span>
+                            <span class="text-brand-gold font-bold">★ 9.5</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filter Item 2 -->
+                <div class="filter-item deepdive bg-brand-cardBg border border-brand-border rounded-xl overflow-hidden hover:border-brand-gold/60 transition-all duration-300 flex flex-col group">
+                    <div class="relative h-44 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1594909122845-11baa439b7bf?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Horror">
+                        <span class="absolute top-2 left-2 bg-brand-red text-white text-[10px] font-bold px-2 py-0.5 rounded">Deep Dive</span>
+                    </div>
+                    <div class="p-4 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h4 class="text-base font-bold text-white group-hover:text-brand-red transition-colors line-clamp-2">L'Evoluzione dell'Horror Moderno da A24</h4>
+                            <p class="text-xs text-gray-400 mt-2 line-clamp-2">Da Hereditary a Midsommar: l'ascesa dell'elevated horror al botteghino.</p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-brand-border/40 flex items-center justify-between text-xs text-gray-400">
+                            <span>8 min</span>
+                            <span class="text-brand-gold font-bold">★ 9.0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filter Item 3 -->
+                <div class="filter-item curiosita bg-brand-cardBg border border-brand-border rounded-xl overflow-hidden hover:border-brand-gold/60 transition-all duration-300 flex flex-col group">
+                    <div class="relative h-44 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Trivia">
+                        <span class="absolute top-2 left-2 bg-yellow-500 text-black text-[10px] font-bold px-2 py-0.5 rounded">Curiosità</span>
+                    </div>
+                    <div class="p-4 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h4 class="text-base font-bold text-white group-hover:text-yellow-400 transition-colors line-clamp-2">15 Segreti di Set di The Successor che non sapevi</h4>
+                            <p class="text-xs text-gray-400 mt-2 line-clamp-2">Dagli improvvisi cambi di copione agli easter egg nascosti nei costumi.</p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-brand-border/40 flex items-center justify-between text-xs text-gray-400">
+                            <span>5 min</span>
+                            <span class="text-brand-gold font-bold">★ 8.7</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filter Item 4 -->
+                <div class="filter-item trailer bg-brand-cardBg border border-brand-border rounded-xl overflow-hidden hover:border-brand-gold/60 transition-all duration-300 flex flex-col group">
+                    <div class="relative h-44 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Trailer">
+                        <span class="absolute top-2 left-2 bg-blue-600 text-white text-[10px] font-bold px-2 py-0.5 rounded">Trailer</span>
+                    </div>
+                    <div class="p-4 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h4 class="text-base font-bold text-white group-hover:text-blue-400 transition-colors line-clamp-2">Breakdown Trailer: Il ritorno del Cavaliere Oscuro</h4>
+                            <p class="text-xs text-gray-400 mt-2 line-clamp-2">Ogni singolo dettaglio nascosto nei 2 minuti del teaser rilasciato oggi.</p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-brand-border/40 flex items-center justify-between text-xs text-gray-400">
+                            <span>3 min</span>
+                            <span class="text-brand-gold font-bold">★ 9.1</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="top-chart" class="py-20 relative bg-brand-dark border-t border-brand-border/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="flex flex-col md:flex-row items-start md:items-end justify-between mb-12">
+                <div>
+                    <div class="flex items-center gap-2 text-brand-gold font-bold text-xs uppercase tracking-widest mb-2">
+                        <i class="fa-solid fa-trophy"></i> Classification Leaderboard
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Top Chart del Mese</h2>
+                </div>
+                <p class="text-gray-400 text-sm mt-2 md:mt-0">Le recensioni più lette e discusse dalla nostra community in questo mese.</p>
+            </div>
+
+            <!-- Vertical Ranking List (Netflix Style Big Numbers) -->
+            <div class="space-y-4">
+                
+                <!-- Rank 1 -->
+                <div class="bg-brand-cardBg border border-brand-border/80 hover:border-brand-gold/50 rounded-2xl p-4 sm:p-6 transition-all duration-300 hover:scale-[1.01] flex flex-col sm:flex-row items-center gap-6 group">
+                    <span class="text-5xl sm:text-7xl font-extrabold text-gradient-gold font-display w-16 text-center">#1</span>
+                    <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=300&auto=format&fit=crop" class="w-24 h-24 sm:w-28 sm:h-28 rounded-xl object-cover" alt="The Last of Us">
+                    <div class="flex-1 text-center sm:text-left">
+                        <div class="flex items-center justify-center sm:justify-start gap-2 text-xs text-brand-gold font-bold mb-1">
+                            <span>SERIE TV</span> • <span>12.4K Letture</span>
+                        </div>
+                        <h3 class="text-lg sm:text-xl font-bold text-white group-hover:text-brand-gold transition-colors">The Last of Us Season 2: Perché adatterà fedelmente il secondo capitolo</h3>
+                        <p class="text-xs sm:text-sm text-gray-400 mt-1 line-clamp-2">Le dichiarazioni di Craig Mazin e Neil Druckmann sul futuro del franchise e sui nuovi personaggi.</p>
+                    </div>
+                    <div class="flex flex-col items-center sm:items-end gap-2 w-full sm:w-auto border-t sm:border-t-0 border-brand-border/50 pt-3 sm:pt-0">
+                        <div class="flex items-center gap-1 text-brand-gold font-bold text-lg">
+                            <i class="fa-solid fa-star"></i> 9.9
+                        </div>
+                        <a href="#" class="bg-brand-gold/10 text-brand-gold hover:bg-brand-gold hover:text-black font-bold text-xs px-4 py-2 rounded-lg transition-all">
+                            Leggi Ora
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Rank 2 -->
+                <div class="bg-brand-cardBg border border-brand-border/80 hover:border-brand-red/50 rounded-2xl p-4 sm:p-6 transition-all duration-300 hover:scale-[1.01] flex flex-col sm:flex-row items-center gap-6 group">
+                    <span class="text-5xl sm:text-7xl font-extrabold text-gray-600 font-display w-16 text-center">#2</span>
+                    <img src="https://images.unsplash.com/photo-1578632767115-351597cf2477?q=80&w=300&auto=format&fit=crop" class="w-24 h-24 sm:w-28 sm:h-28 rounded-xl object-cover" alt="Anime Film">
+                    <div class="flex-1 text-center sm:text-left">
+                        <div class="flex items-center justify-center sm:justify-start gap-2 text-xs text-brand-red font-bold mb-1">
+                            <span>CINEMA D'ANIMAZIONE</span> • <span>9.8K Letture</span>
+                        </div>
+                        <h3 class="text-lg sm:text-xl font-bold text-white group-hover:text-brand-red transition-colors">Miyazaki e l'Eredità dello Studio Ghibli</h3>
+                        <p class="text-xs sm:text-sm text-gray-400 mt-1 line-clamp-2">Analisi poetica delle tematiche ambientali ed umane nell'ultimo capolavoro dell'animazione giapponese.</p>
+                    </div>
+                    <div class="flex flex-col items-center sm:items-end gap-2 w-full sm:w-auto border-t sm:border-t-0 border-brand-border/50 pt-3 sm:pt-0">
+                        <div class="flex items-center gap-1 text-brand-gold font-bold text-lg">
+                            <i class="fa-solid fa-star"></i> 9.7
+                        </div>
+                        <a href="#" class="bg-brand-red/10 text-brand-red hover:bg-brand-red hover:text-white font-bold text-xs px-4 py-2 rounded-lg transition-all">
+                            Leggi Ora
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Rank 3 -->
+                <div class="bg-brand-cardBg border border-brand-border/80 hover:border-brand-border rounded-2xl p-4 sm:p-6 transition-all duration-300 hover:scale-[1.01] flex flex-col sm:flex-row items-center gap-6 group">
+                    <span class="text-5xl sm:text-7xl font-extrabold text-gray-700 font-display w-16 text-center">#3</span>
+                    <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=300&auto=format&fit=crop" class="w-24 h-24 sm:w-28 sm:h-28 rounded-xl object-cover" alt="Batman">
+                    <div class="flex-1 text-center sm:text-left">
+                        <div class="flex items-center justify-center sm:justify-start gap-2 text-xs text-gray-400 font-bold mb-1">
+                            <span>FILM CULT</span> • <span>8.1K Letture</span>
+                        </div>
+                        <h3 class="text-lg sm:text-xl font-bold text-white group-hover:text-gray-300 transition-colors">I 20 migliori Thriller Psicologici da vedere stasera</h3>
+                        <p class="text-xs sm:text-sm text-gray-400 mt-1 line-clamp-2">Una selezione di film ad alta tensione pronti da recuperare sulle principali piattaforme streaming.</p>
+                    </div>
+                    <div class="flex flex-col items-center sm:items-end gap-2 w-full sm:w-auto border-t sm:border-t-0 border-brand-border/50 pt-3 sm:pt-0">
+                        <div class="flex items-center gap-1 text-brand-gold font-bold text-lg">
+                            <i class="fa-solid fa-star"></i> 9.4
+                        </div>
+                        <a href="#" class="bg-white/5 text-gray-300 hover:bg-white/20 font-bold text-xs px-4 py-2 rounded-lg transition-all">
+                            Leggi Ora
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 relative overflow-hidden">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="bg-gradient-to-r from-brand-cardBg via-brand-darkRed/20 to-brand-cardBg border border-brand-red/40 rounded-3xl p-8 sm:p-12 text-center shadow-2xl relative">
+                
+                <!-- Background Accent Glow -->
+                <div class="absolute -top-12 left-1/2 -translate-x-1/2 w-72 h-72 bg-brand-red/20 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-brand-red/20 border border-brand-red/50 text-brand-red text-2xl mb-6">
+                    <i class="fa-solid fa-envelope-open-text"></i>
+                </div>
+
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Non perderti nemmeno uno spoiler-free update</h2>
+                <p class="text-gray-300 text-sm sm:text-base max-w-xl mx-auto mt-3">
+                    Unisciti ad oltre <strong>50.000 cinefili</strong>. Ricevi ogni venerdì la nostra newsletter esclusiva con le migliori uscite del weekend e recensioni in anteprima.
+                </p>
+
+                <!-- Form -->
+                <form onsubmit="handleSubscribe(event)" class="mt-8 max-w-md mx-auto flex flex-col sm:flex-row gap-3">
+                    <input type="email" required placeholder="Inserisci la tua email..." 
+                           class="flex-1 bg-brand-dark/90 border border-brand-border rounded-xl px-4 py-3.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-brand-red">
+                    <button type="submit" class="bg-brand-red hover:bg-brand-darkRed text-white font-bold px-6 py-3.5 rounded-xl shadow-lg glow-red transition-all duration-300 flex items-center justify-center gap-2 whitespace-nowrap">
+                        <span>Iscriviti Gratis</span>
+                        <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </button>
+                </form>
+
+                <p class="text-[11px] text-gray-500 mt-4">
+                    <i class="fa-solid fa-lock mr-1"></i> Nessun motivo di spam. Cancellazione con un solo click in qualsiasi momento.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-brand-dark border-t border-brand-border text-gray-400 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-brand-border/50">
+                
+                <!-- Brand Info -->
+                <div class="lg:col-span-2 space-y-4">
+                    <a href="#" class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-red to-brand-gold flex items-center justify-center text-white">
+                            <i class="fa-solid fa-film text-lg"></i>
+                        </div>
+                        <span class="font-display font-extrabold text-xl text-white">CINE<span class="text-brand-red">FILM</span> & TV</span>
+                    </a>
+                    <p class="text-xs leading-relaxed text-gray-400 max-w-sm">
+                        CineFilm & TV è la destinazione numero uno per appassionati di cinema, serie TV ed intrattenimento. Recensioni, analisi approfondite e trailer aggiornati ogni giorno.
+                    </p>
+                    <div class="flex items-center gap-3 pt-2">
+                        <a href="#" class="w-9 h-9 rounded-lg bg-brand-cardBg border border-brand-border hover:border-brand-red hover:text-brand-red flex items-center justify-center transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-lg bg-brand-cardBg border border-brand-border hover:border-brand-red hover:text-brand-red flex items-center justify-center transition-colors"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-lg bg-brand-cardBg border border-brand-border hover:border-brand-red hover:text-brand-red flex items-center justify-center transition-colors"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-lg bg-brand-cardBg border border-brand-border hover:border-brand-red hover:text-brand-red flex items-center justify-center transition-colors"><i class="fa-brands fa-tiktok"></i></a>
+                    </div>
+                </div>
+
+                <!-- Navigation Columns -->
+                <div>
+                    <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-4">Navigazione</h4>
+                    <ul class="space-y-2.5 text-xs">
+                        <li><a href="#home" class="hover:text-brand-red transition-colors">Home Page</a></li>
+                        <li><a href="#trending" class="hover:text-brand-red transition-colors">In Evidenza</a></li>
+                        <li><a href="#serie-film" class="hover:text-brand-red transition-colors">Recensioni Serie TV</a></li>
+                        <li><a href="#serie-film" class="hover:text-brand-red transition-colors">Schede Film</a></li>
+                        <li><a href="#top-chart" class="hover:text-brand-red transition-colors">Classifica del Mese</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-4">Categorie</h4>
+                    <ul class="space-y-2.5 text-xs">
+                        <li><a href="#" class="hover:text-brand-gold transition-colors">Deep Dive & Analisi</a></li>
+                        <li><a href="#" class="hover:text-brand-gold transition-colors">Cinema Sci-Fi & Horror</a></li>
+                        <li><a href="#" class="hover:text-brand-gold transition-colors">Piattaforme Streaming</a></li>
+                        <li><a href="#" class="hover:text-brand-gold transition-colors">Interviste al Cast</a></li>
+                        <li><a href="#" class="hover:text-brand-gold transition-colors">Rumors & Spoiler-Free</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-4">Info Legali</h4>
+                    <ul class="space-y-2.5 text-xs">
+                        <li><a href="#" class="hover:text-gray-200 transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-gray-200 transition-colors">Cookie Policy</a></li>
+                        <li><a href="#" class="hover:text-gray-200 transition-colors">Termini di Servizio</a></li>
+                        <li><a href="#" class="hover:text-gray-200 transition-colors">Contatta la Redazione</a></li>
+                        <li><a href="#" class="hover:text-gray-200 transition-colors">Lavora con Noi</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Bottom Copyright -->
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500 gap-4">
+                <p>&copy; 2026 CineFilm & TV. Tutti i diritti riservati. Creato per amanti del cinema.</p>
+                <div class="flex items-center gap-4">
+                    <span>Design Moderno & Elegante</span>
+                    <span>•</span>
+                    <a href="#home" class="text-brand-red hover:underline"><i class="fa-solid fa-arrow-up mr-1"></i> Torna in Alto</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="newsletter-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+        <div class="bg-brand-cardBg border border-brand-border rounded-2xl max-w-lg w-full p-6 sm:p-8 relative shadow-2xl animate-fade-in">
+            <button onclick="toggleModal('newsletter-modal')" class="absolute top-4 right-4 text-gray-400 hover:text-white text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            
+            <div class="text-center">
+                <div class="w-12 h-12 rounded-full bg-brand-red/20 text-brand-red flex items-center justify-center mx-auto mb-4 text-xl">
+                    <i class="fa-solid fa-clapperboard"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-white">Unisciti al Club dei Cinefili</h3>
+                <p class="text-xs text-gray-400 mt-2">Ricevi aggiornamenti sulle ultime uscite e contenuti esclusivi direttamente nella tua casella di posta.</p>
+                
+                <form onsubmit="handleModalSubscribe(event)" class="mt-6 space-y-3">
+                    <input type="text" required placeholder="Il tuo nome" class="w-full bg-brand-dark border border-brand-border rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-brand-red">
+                    <input type="email" required placeholder="La tua email principale" class="w-full bg-brand-dark border border-brand-border rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-brand-red">
+                    <button type="submit" class="w-full bg-brand-red hover:bg-brand-darkRed text-white font-bold py-3 rounded-xl shadow-lg glow-red transition-all text-xs uppercase tracking-wider">
+                        Conferma Iscrizione
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast Message -->
+    <div id="toast-msg" class="fixed bottom-5 right-5 z-50 hidden bg-brand-red text-white text-xs font-bold px-5 py-3 rounded-xl shadow-2xl items-center gap-2">
+        <i class="fa-solid fa-circle-check text-lg"></i>
+        <span id="toast-text">Iscrizione completata con successo!</span>
+    </div>
+
+    <script>
+        // Toggle Mobile Menu Drawer
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Filter Content Grid Functionality
+        function filterContent(category) {
+            const items = document.querySelectorAll('.filter-item');
+            const buttons = document.querySelectorAll('#filter-tabs .tab-btn');
+
+            // Toggle active state for tab buttons
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-brand-red', 'text-white');
+                btn.classList.add('bg-brand-cardBg', 'text-gray-300');
+            });
+
+            event.currentTarget.classList.remove('bg-brand-cardBg', 'text-gray-300');
+            event.currentTarget.classList.add('bg-brand-red', 'text-white');
+
+            // Filter elements logic
+            items.forEach(item => {
+                if (category === 'all' || item.classList.contains(category)) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Modal Toggle Script
+        function toggleModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.classList.toggle('hidden');
+        }
+
+        // Custom Toast Notification Trigger
+        function showToast(message) {
+            const toast = document.getElementById('toast-msg');
+            const toastText = document.getElementById('toast-text');
+            toastText.textContent = message;
+            
+            toast.classList.remove('hidden');
+            toast.classList.add('flex');
+
+            setTimeout(() => {
+                toast.classList.add('hidden');
+                toast.classList.remove('flex');
+            }, 4000);
+        }
+
+        // Handle Form Submissions
+        function handleSubscribe(e) {
+            e.preventDefault();
+            showToast("Grazie per esserti iscritto alla newsletter di CineFilm & TV!");
+            e.target.reset();
+        }
+
+        function handleModalSubscribe(e) {
+            e.preventDefault();
+            toggleModal('newsletter-modal');
+            showToast("Benvenuto nella community! Controlla la tua e-mail.");
+            e.target.reset();
+        }
+
+        // Header Background Blur on Scroll
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('main-header');
+            if (window.scrollY > 50) {
+                header.classList.add('py-1', 'shadow-2xl');
+            } else {
+                header.classList.remove('py-1', 'shadow-2xl');
+            }
+        });
+    </script>
+</body>
+</html>
